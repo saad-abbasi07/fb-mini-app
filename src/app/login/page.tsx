@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -11,7 +9,7 @@ export default function LoginPage() {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -24,7 +22,6 @@ export default function LoginPage() {
     setShowModal(true);
 
     if (data.message === "Login successful") {
-      // Store token in localStorage for client-side auth checks
       if (data.token) {
         localStorage.setItem("auth-token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
