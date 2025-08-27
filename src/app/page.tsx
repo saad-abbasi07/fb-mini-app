@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 /* -----------------------------
    Minimal inline icon component
 ----------------------------- */
-const Icon = ({ path, className = "w-5 h-5" }) => (
+const Icon = ({ path, className = "w-5 h-5" }: { path: string; className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" className={className}>
     <path d={path} />
   </svg>
@@ -34,7 +34,7 @@ function useRandomFeed() {
 /* -----------------------------
    Top Navigation Bar
 ----------------------------- */
-const TopNav = ({ user, onLogout }) => (
+const TopNav = ({ user, onLogout }: { user: any; onLogout: () => void }) => (
   <header className="sticky top-0 z-20 bg-white shadow flex items-center justify-between px-4 py-2">
     <div className="flex items-center gap-2">
       <img
@@ -71,7 +71,7 @@ const TopNav = ({ user, onLogout }) => (
 /* -----------------------------
    Sidebar Navigation
 ----------------------------- */
-const SideNav = ({ user }) => (
+const SideNav = ({ user }: { user: any }) => (
   <aside className="hidden lg:block w-64 p-4 space-y-2 text-gray-700">
     <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-2 rounded-lg">
       <img src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" alt="Profile" className="w-6 h-6" />
@@ -215,7 +215,7 @@ export default function FacebookLikePage() {
       const userData = localStorage.getItem("user");
       
       if (!token) {
-        router.push("/login");
+        router.replace("/login");
         return;
       }
       
@@ -228,6 +228,8 @@ export default function FacebookLikePage() {
         console.error("Error parsing user data:", error);
         localStorage.removeItem("auth-token");
         localStorage.removeItem("user");
+        // Clear cookies as well
+        document.cookie = "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         router.push("/login");
       } finally {
         setLoading(false);

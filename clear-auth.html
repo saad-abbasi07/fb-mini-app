@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear Authentication Data</title>
+</head>
+<body>
+    <h1>Clear Authentication Data</h1>
+    <button onclick="clearAll()">Clear All Auth Data</button>
+    <div id="status"></div>
+
+    <script>
+        function clearAll() {
+            // Clear localStorage
+            localStorage.removeItem('auth-token');
+            localStorage.removeItem('user');
+            
+            // Clear cookies
+            document.cookie = "auth-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            
+            // Clear sessionStorage
+            sessionStorage.clear();
+            
+            document.getElementById('status').innerHTML = 'All authentication data cleared! Now visit <a href="http://localhost:3000">localhost:3000</a>';
+        }
+    </script>
+</body>
+</html>

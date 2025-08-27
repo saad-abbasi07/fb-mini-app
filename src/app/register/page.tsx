@@ -17,7 +17,7 @@ export default function RegisterPage() {
   const [showModal, setShowModal] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const name = `${firstName} ${surname}`;
