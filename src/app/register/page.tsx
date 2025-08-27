@@ -86,8 +86,9 @@ export default function RegisterPage() {
           Create a new account
         </h2>
         <p style={{ textAlign: "center", marginBottom: 16, color: "#606770" }}>
-          It's quick and easy.
-        </p>
+  It&apos;s quick and easy.
+</p>
+
         <hr style={{ marginBottom: 20, border: "0.5px solid #ddd" }} />
 
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 12 }}>
